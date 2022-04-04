@@ -1,0 +1,27 @@
+name: 'Publish test results'
+description: 'Upload JUnit test results'
+author: 'GitHub'
+inputs:
+  name:
+    description: Display name for test suite
+    required: true
+  juint_file_path:
+    description: Path to JUnit XML file from test run
+    required: true
+  tags:
+    description: Comma separated list of key:value tags
+    required: false
+  datadog_api_token:
+    description: DataDog API token
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Publish test results to DataDog
+      shell: bash
+      env:
+        DD_ENV: ci
+        DATADOG_API_KEY: ${{ inputs.datadog_api_token }}
+        DD_TAGS: ${{ inputs.tags }}
+        DD_SERVICE: ${{ inputs.name }}
+      run: npx @datadog/datadog-ci junit upload ${{ inputs.junit_file_path }}
