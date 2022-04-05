@@ -1,6 +1,6 @@
 # Heartland Retail GitHub Actions
 
-This is a collection of various reusable GitHub actions for use in our private repos
+This is a collection of various reusable GitHub actions used by Heartland Retail repos
 
 ## Usage
 

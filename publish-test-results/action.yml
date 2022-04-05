@@ -5,7 +5,7 @@ inputs:
   name:
     description: Display name for test suite
     required: true
-  juint_file_path:
+  junit_file_path:
     description: Path to JUnit XML file from test run
     required: true
   tags:
