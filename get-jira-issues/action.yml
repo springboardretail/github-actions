@@ -1,0 +1,26 @@
+name: 'Get Jira issues'
+description: 'Parse Jira issue numbers from commit messages between base and target branches'
+
+inputs:
+  repository:
+    description: 'Repository name in format owner/repo'
+  base_branch:
+    description: Base branch for comparison
+  target_branch:
+    description: Target branch to compare against base branch
+  jira_prefixes:
+    description: 'Comma separated list of Jira prefixes'
+    required: true
+  github_token:
+    description: GitHub token
+    required: true
+
+outputs:
+  jira_issues:
+    description: 'JSON containing array of Jira issues'
+  jira_issues_string:
+    description: 'String containing Jira issues separated by newlines'
+
+runs:
+  using: node20
+  main: ../lib/get-jira-issues.js
