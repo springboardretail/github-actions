@@ -41,3 +41,26 @@ This will provide two outputs
 
 - `jira_issues`: A JSON array containing the unique issue numbers
 - `jira_issues_string`: A newline separated string contianing a sorted unique list of issue numbers
+
+### update-pr-description
+
+See [update-pr-description/action.yml](update-pr-description/action.yml)
+
+Updates the PR description with the new contents, optionally replacing existing matching content.
+
+```yml
+  - uses: springboard-retail/github-actions/update-pr-description
+    with:
+      match_regex: '<!-- JIRA_ISSUES -->[\s\S]*<!-- JIRA_ISSUES_END -->'
+      new_content: |
+        <!-- JIRA_ISSUES -->
+        ## Jira Tickets Connected to this Release
+        ${{ steps.get_jira_issues.outputs.jira_issues_string }}
+        <!-- JIRA_ISSUES_END -->
+      github_token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+If you plan to run this action from a different repo, you can optionally pass
+
+- `repository` (owner/repo)
+- `pr_number`

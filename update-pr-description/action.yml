@@ -1,0 +1,20 @@
+name: 'Update PR description'
+description: 'Updates the PR description with new content based on a regex match'
+
+inputs:
+  repository:
+    description: 'Repository name in format owner/repo'
+  pr_number:
+    description: 'Pull request number'
+  match_regex:
+    description: 'Regex to match the section of the PR description to update (if not specified will append to the end of the description)'
+  new_content:
+    description: 'New content to add to the matching section of the of the PR description'
+    required: true
+  github_token:
+    description: GitHub token
+    required: true
+
+runs:
+  using: node20
+  main: ../lib/update-pr-description.js
