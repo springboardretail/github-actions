@@ -9,10 +9,10 @@
  */
 export const descriptionBuilder = (currentDescription, newContents, matchRegex) => {
   if (matchRegex.test(currentDescription)) {
-    console.log("Matching content found, replacing it with new contents")
-    return currentDescription.replace(matchRegex, newContents);
+    console.log('Matching content found, replacing it with new contents')
+    return currentDescription.replace(matchRegex, newContents)
   } else {
-    console.log("No matching content found, adding new contents to the end")
-    return `${currentDescription}\n\n${newContents}`;
+    console.log('No matching content found, adding new contents to the end')
+    return `${currentDescription}\n\n${newContents}`
   }
 }
