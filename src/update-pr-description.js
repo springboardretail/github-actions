@@ -2,6 +2,7 @@
 
 const core = require('@actions/core');
 const github = require('@actions/github');
+const { descriptionBuilder } = require('./lib/descriptionBuilder');
 
 async function run() {
   // Init inputs and context
@@ -32,15 +33,7 @@ async function run() {
 
   // Build new PR description
   const matchRegex = new RegExp(matchRegexString, 'g');
-  let newDescription
-  console.log("Checking for matching content using regex:", matchRegex)
-  if (matchRegexString === undefined || !matchRegex.test(currentDescription)) {
-    console.log("No matching content found, adding new contents to the end")
-    newDescription = `${currentDescription}\n\n${newContents}`;
-  } else {
-    console.log("Matching content found, replacing it with new contents")
-    newDescription = currentDescription.replace(matchRegex, newContents);
-  }
+  const newDescription = descriptionBuilder(currentDescription, newContents, matchRegex)
 
   // Update the PR description
   console.log("Updating PR description to:\n", newDescription);
